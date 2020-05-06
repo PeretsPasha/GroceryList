@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:padding="14dp"
     tools:context=".MainActivity">
 
     <EditText
@@ -32,6 +32,16 @@
         android:text="-" />
 
     <Button
+        android:id="@+id/button_clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/button_decrease"
+        android:layout_alignBottom="@+id/button_decrease"
+        android:layout_marginEnd="8dp"
+        android:layout_toStartOf="@+id/button_decrease"
+        android:text="Очистити" />
+
+    <Button
         android:id="@+id/button_increase"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
@@ -48,7 +58,7 @@
         android:layout_alignBottom="@+id/button_increase"
         android:layout_marginStart="8dp"
         android:layout_toEndOf="@+id/button_increase"
-        android:text="add" />
+        android:text="Добавити" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"

@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         Button buttonIncrease = findViewById(R.id.button_increase);
         Button buttonDecrease = findViewById(R.id.button_decrease);
         Button buttonAdd = findViewById(R.id.button_add);
+        Button buttonClear = findViewById(R.id.button_clear);
 
         buttonIncrease.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +75,20 @@ public class MainActivity extends AppCompatActivity {
                 addItem();
             }
         });
+
+        buttonClear.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                clearList();
+                return true;
+            }
+        });
+    }
+
+    private void clearList() {
+        mDatabase.delete(GroceryContract.GroceryEntry.TABLE_NAME,
+                GroceryContract.GroceryEntry._ID, null);
+        mAdapter.swapCursor(getAllItems());
     }
 
     private void increase() {
