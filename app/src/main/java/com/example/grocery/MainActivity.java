@@ -29,12 +29,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mediaPlayer = MediaPlayer.create(this, R.raw.trash);
+        mediaPlayer.setVolume(0.05f,0.05f);
 
         GroceryDBHelper dbHelper = new GroceryDBHelper(this);
         mDatabase = dbHelper.getWritableDatabase();
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         mAdapter = new GroceryAdapter(this, getAllItems());
         recyclerView.setAdapter(mAdapter);
 
