@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Test dev branch
+
         mediaPlayer = MediaPlayer.create(this, R.raw.trash);
 
         GroceryDBHelper dbHelper = new GroceryDBHelper(this);
