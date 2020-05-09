@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:layout_margin="8dp"
-    >
+    android:layout_margin="8dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/media_card_view"
@@ -26,14 +25,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:text="0"
-            android:layout_gravity="center_vertical"
-            android:gravity="center"
-            android:textColor="@color/primaryTextColor"
-            android:textSize="24sp"
+            android:textSize="30sp"
+            app:fontFamily="monospace"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-
-            />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textview_name_item"
@@ -43,9 +38,8 @@
             android:layout_margin="8dp"
             android:gravity="center"
             android:text="Empty Item"
-
-            android:textColor="@color/primaryTextColor"
             android:textSize="24sp"
+            app:fontFamily="casual"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
