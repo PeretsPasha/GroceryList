@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         mediaPlayer = MediaPlayer.create(this, R.raw.trash);
         littleDel = MediaPlayer.create(this, R.raw.littledel);
         mediaPlayer.setVolume(0.05f,0.05f);
@@ -204,18 +203,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-
-        outState.putString("editText",name);
         outState.putInt("amount", mAmount);
-
     }
 
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-
-        name = savedInstanceState.getString("editText");
         mAmount = savedInstanceState.getInt("amount");
-
+        mTextViewAmount.setText(String.valueOf(mAmount));
     }
 }
