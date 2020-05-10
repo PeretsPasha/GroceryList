@@ -1,0 +1,19 @@
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main.xml	(revision aae289e1e4d0591353aea25a87218acc58fdc4f2)
++++ app/src/main/res/layout/activity_main.xml	(date 1589139153588)
+@@ -28,10 +28,9 @@
+         <EditText
+             android:id="@+id/edittext_name"
+             android:layout_width="match_parent"
+-            android:layout_height="100dp"
++            android:layout_height="wrap_content"
+             android:layout_margin="8dp"
+             android:gravity="center"
+-            android:textSelectHandle="@font/roboto"
+             android:textSize="34sp"
+             android:textStyle="bold" />
+ 
