@@ -28,10 +28,9 @@
         <EditText
             android:id="@+id/edittext_name"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:gravity="center"
-            android:textSelectHandle="@font/roboto"
             android:textSize="34sp"
             android:textStyle="bold" />
 
