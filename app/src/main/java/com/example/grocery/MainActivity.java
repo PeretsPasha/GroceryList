@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences prefs;
     Switch aSwitch;
 
+
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
