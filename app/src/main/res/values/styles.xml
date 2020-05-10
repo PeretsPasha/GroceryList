@@ -9,6 +9,7 @@
         <item name="titleTextColor">@color/primaryTextColor</item>
         <item name="fontFamily">@font/roboto_light</item>
         <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:windowAnimationStyle">@style/windowAnimation</item>
     </style>
 
     <style name="AppThemeDark" parent="Theme.AppCompat.NoActionBar">
@@ -17,10 +18,7 @@
         <item name="colorAccent">@color/primaryColor</item>
         <item name="titleTextColor">@color/primaryColor</item>
         <item name="android:textColor">@color/primaryColor</item>
+        <item name="android:windowAnimationStyle">@style/windowAnimation</item>
     </style>
-
-
-
-
-
+    
 </resources>
