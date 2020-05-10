@@ -28,17 +28,13 @@ public class MainActivity extends AppCompatActivity {
     private EditText mEditTextName;
     private TextView mTextViewAmount;
     private int mAmount = 0;
+    private String name;
     private MediaPlayer mediaPlayer,littleDel;
 
     //to change the theme we create this variables
     private SharedPreferences prefs;
     Switch aSwitch;
 
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
 
         mEditTextName = findViewById(R.id.edittext_name);
         mTextViewAmount = findViewById(R.id.textview_amount);
+
         Button buttonIncrease = findViewById(R.id.button_increase);
         Button buttonDecrease = findViewById(R.id.button_decrease);
         Button buttonAdd = findViewById(R.id.button_add);
@@ -173,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        String name = mEditTextName.getText().toString();
+        name = mEditTextName.getText().toString();
         ContentValues cv = new ContentValues();
         cv.put(GroceryContract.GroceryEntry.COLUMN_NAME, name);
         cv.put(GroceryContract.GroceryEntry.COLUMN_AMOUNT, mAmount);
@@ -204,5 +201,21 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
 
+        outState.putString("editText",name);
+        outState.putInt("amount", mAmount);
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        name = savedInstanceState.getString("editText");
+        mAmount = savedInstanceState.getInt("amount");
+
+    }
 }

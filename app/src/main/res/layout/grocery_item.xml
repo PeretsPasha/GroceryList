@@ -26,7 +26,6 @@
             android:layout_marginLeft="8dp"
             android:text="0"
             android:textSize="30sp"
-            app:fontFamily="monospace"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,7 +38,6 @@
             android:gravity="center"
             android:text="Empty Item"
             android:textSize="24sp"
-            app:fontFamily="casual"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
