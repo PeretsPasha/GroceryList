@@ -18,6 +18,7 @@
         <item name="colorAccent">@color/primaryColor</item>
         <item name="titleTextColor">@color/primaryColor</item>
         <item name="android:textColor">@color/primaryColor</item>
+        <item name="android:editTextColor">@color/primaryDarkColor</item>
         <item name="android:windowAnimationStyle">@style/windowAnimation</item>
     </style>
     
