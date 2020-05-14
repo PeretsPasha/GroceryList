@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -32,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
     private MediaPlayer mediaPlayer,littleDel;
 
     //to change the theme we create this variables
-    private SharedPreferences prefs;
     Switch aSwitch;
 
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,12 +61,12 @@ public class MainActivity extends AppCompatActivity {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
-                    finish();
+
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
-                    finish();
+
                 }
             }
         });
@@ -143,7 +144,30 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        sharedPreferences = getPreferences(MODE_PRIVATE);
+
+        Log.d("myLog","====="+mAmount+" "+name+"=====tupo skyrim====");
+
+
     }
+
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+          mAmount=sharedPreferences.getInt("amount",1);
+          name=sharedPreferences.getString("name","");
+          Log.d("myLog","====="+mAmount+" "+name+"=====");
+
+            mTextViewAmount.setText(String.valueOf(mAmount));
+            mEditTextName.setText(name);
+
+    }
+
+
+    ///////////////////////////////////////////////////////////////////////////////////////////
 
     private void clearList() {
         mDatabase.delete(GroceryContract.GroceryEntry.TABLE_NAME,
@@ -154,12 +178,28 @@ public class MainActivity extends AppCompatActivity {
     private void increase() {
         mAmount++;
         mTextViewAmount.setText(String.valueOf(mAmount));
+
+        name = mEditTextName.getText().toString();
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("name", name);
+        editor.putInt("amount",mAmount);
+        editor.apply();
+
+        Log.d("myLog","====="+mAmount+" "+name+"=====tupo skyrim====");
     }
 
     private void decrease() {
         if (mAmount > 0) {
             mAmount--;
             mTextViewAmount.setText(String.valueOf(mAmount));
+
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("name", name);
+            editor.putInt("amount",mAmount);
+            editor.apply();
+
+            Log.d("myLog","====="+mAmount+" "+name+"=====tupo skyrim====");
         }
     }
 

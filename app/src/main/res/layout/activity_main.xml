@@ -40,7 +40,6 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
         android:orientation="horizontal"
         >
 
@@ -50,6 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="8dp"
+            android:layout_weight="1"
             android:text="Очистити" />
 
         <Button
@@ -59,12 +59,13 @@
             android:layout_gravity="center"
             android:layout_margin="8dp"
             android:gravity="center"
+            android:layout_weight="1"
             android:text="-"
             android:textColor="#FF0000" />
 
         <TextView
             android:id="@+id/textview_amount"
-            android:layout_width="40dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="8dp"
@@ -72,11 +73,13 @@
             android:layout_marginEnd="8dp"
             android:gravity="center"
             android:text="0"
+            android:layout_weight="1"
             android:textSize="34sp" />
 
         <Button
             android:id="@+id/button_increase"
             android:layout_width="50dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="8dp"
@@ -86,6 +89,7 @@
 
         <Button
             android:id="@+id/button_add"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
