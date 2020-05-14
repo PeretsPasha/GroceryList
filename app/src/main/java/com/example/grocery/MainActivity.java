@@ -178,28 +178,12 @@ public class MainActivity extends AppCompatActivity {
     private void increase() {
         mAmount++;
         mTextViewAmount.setText(String.valueOf(mAmount));
-
-        name = mEditTextName.getText().toString();
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("name", name);
-        editor.putInt("amount",mAmount);
-        editor.apply();
-
-        Log.d("myLog","====="+mAmount+" "+name+"=====tupo skyrim====");
     }
 
     private void decrease() {
         if (mAmount > 0) {
             mAmount--;
             mTextViewAmount.setText(String.valueOf(mAmount));
-
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("name", name);
-            editor.putInt("amount",mAmount);
-            editor.apply();
-
-            Log.d("myLog","====="+mAmount+" "+name+"=====tupo skyrim====");
         }
     }
 
@@ -251,5 +235,16 @@ public class MainActivity extends AppCompatActivity {
         super.onRestoreInstanceState(savedInstanceState);
         mAmount = savedInstanceState.getInt("amount");
         mTextViewAmount.setText(String.valueOf(mAmount));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        name = mEditTextName.getText().toString();
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("name", name);
+        editor.putInt("amount",mAmount);
+        editor.apply();
     }
 }
