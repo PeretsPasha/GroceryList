@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
+
     private SQLiteDatabase mDatabase;
     private GroceryAdapter mAdapter;
     private EditText mEditTextName;
@@ -31,42 +32,45 @@ public class MainActivity extends AppCompatActivity {
     private int mAmount = 0;
     private String name;
     private MediaPlayer mediaPlayer,littleDel;
-
-    //to change the theme we create this variables
-    Switch aSwitch;
-
-    SharedPreferences sharedPreferences;
+    private SharedPref sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
-            setTheme(R.style.AppThemeDark);
-        } else {
-            setTheme(R.style.AppTheme);
-        }
+         sharedPref = new SharedPref(this);
+         if (sharedPref.loadNightModeState() == true){
+             setTheme(R.style.AppThemeDark);
+         } else setTheme(R.style.AppTheme);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        aSwitch = (Switch) findViewById(R.id.switch1);
+        Switch aSwitch = (Switch) findViewById(R.id.switch1);
 
-        if(AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+        if(sharedPref.loadNightModeState() == true){
             aSwitch.setChecked(true);
+            aSwitch.setText("Світла тема");
+        } else {
+            aSwitch.setText("Темна тема");
         }
+
         aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                    name = mEditTextName.getText().toString();
+                    sharedPref.saveVeriables(name, mAmount);
+                    sharedPref.setNightModeState(true);
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
-
+                    finish();
                 } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                    name = mEditTextName.getText().toString();
+                    sharedPref.saveVeriables(name, mAmount);
+                    sharedPref.setNightModeState(false);
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
-
+                    finish();
                 }
             }
         });
@@ -101,6 +105,11 @@ public class MainActivity extends AppCompatActivity {
 
         mEditTextName = findViewById(R.id.edittext_name);
         mTextViewAmount = findViewById(R.id.textview_amount);
+
+        mAmount = sharedPref.loadAmount();
+        name = sharedPref.loadEdit();
+        mTextViewAmount.setText(String.valueOf(mAmount));
+        mEditTextName.setText(name);
 
         Button buttonIncrease = findViewById(R.id.button_increase);
         Button buttonDecrease = findViewById(R.id.button_decrease);
@@ -144,30 +153,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-        sharedPreferences = getPreferences(MODE_PRIVATE);
-
-        Log.d("myLog","====="+mAmount+" "+name+"=====tupo skyrim====");
-
-
     }
-
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-          mAmount=sharedPreferences.getInt("amount",1);
-          name=sharedPreferences.getString("name","");
-          Log.d("myLog","====="+mAmount+" "+name+"=====");
-
-            mTextViewAmount.setText(String.valueOf(mAmount));
-            mEditTextName.setText(name);
-
-    }
-
-
-    ///////////////////////////////////////////////////////////////////////////////////////////
 
     private void clearList() {
         mDatabase.delete(GroceryContract.GroceryEntry.TABLE_NAME,
@@ -222,29 +208,5 @@ public class MainActivity extends AppCompatActivity {
                 null,
                 GroceryContract.GroceryEntry.COLUMN_TIMESTAMP + " DESC"
         );
-    }
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt("amount", mAmount);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        mAmount = savedInstanceState.getInt("amount");
-        mTextViewAmount.setText(String.valueOf(mAmount));
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        name = mEditTextName.getText().toString();
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("name", name);
-        editor.putInt("amount",mAmount);
-        editor.apply();
     }
 }
