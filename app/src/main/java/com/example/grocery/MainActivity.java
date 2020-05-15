@@ -15,6 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,8 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.polyak.iconswitch.IconSwitch;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
          sharedPref = new SharedPref(this);
          if (sharedPref.loadNightModeState() == true){
              setTheme(R.style.AppThemeDark);
@@ -45,19 +47,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Switch aSwitch = (Switch) findViewById(R.id.switch1);
+        IconSwitch iconSwitch = findViewById(R.id.icon_switch);
 
-        if(sharedPref.loadNightModeState() == true){
-            aSwitch.setChecked(true);
-            aSwitch.setText("Світла тема");
+        if(sharedPref.loadNightModeState() == true) {
+            iconSwitch.setChecked(IconSwitch.Checked.RIGHT);
         } else {
-            aSwitch.setText("Темна тема");
+            iconSwitch.setChecked(IconSwitch.Checked.LEFT);
         }
 
-        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        iconSwitch.setCheckedChangeListener(new IconSwitch.CheckedChangeListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+            public void onCheckChanged(IconSwitch.Checked current) {
+                if (current == IconSwitch.Checked.RIGHT) {
                     name = mEditTextName.getText().toString();
                     sharedPref.saveVeriables(name, mAmount);
                     sharedPref.setNightModeState(true);
@@ -68,8 +69,8 @@ public class MainActivity extends AppCompatActivity {
                     name = mEditTextName.getText().toString();
                     sharedPref.saveVeriables(name, mAmount);
                     sharedPref.setNightModeState(false);
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(intent);
+                    Intent intent2 = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent2);
                     finish();
                 }
             }

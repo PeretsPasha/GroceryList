@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout
-
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
-
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:orientation="vertical"
-   >
+        android:orientation="vertical">
 
-        <Switch
-            android:id="@+id/switch1"
+        <com.polyak.iconswitch.IconSwitch
+            android:layout_marginTop="10dp"
+            android:layout_gravity="end"
+            android:id="@+id/icon_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_margin="8dp"
-            android:text="Switch" />
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            app:isw_icon_left="@drawable/ic_day"
+            app:isw_icon_right="@drawable/ic_night"
+            app:isw_icon_size="15dp"/>
 
         <EditText
             android:id="@+id/edittext_name"
@@ -40,8 +40,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/button_clear"
@@ -105,8 +104,7 @@
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
-        />
+        android:layout_gravity="center_horizontal" />
 
 
 </LinearLayout>
