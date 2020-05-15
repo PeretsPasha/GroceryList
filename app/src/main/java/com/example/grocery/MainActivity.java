@@ -209,4 +209,11 @@ public class MainActivity extends AppCompatActivity {
                 GroceryContract.GroceryEntry.COLUMN_TIMESTAMP + " DESC"
         );
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        name = mEditTextName.getText().toString();
+        sharedPref.saveVeriables(name, mAmount);
+    }
 }
