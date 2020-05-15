@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
         mAdapter.swapCursor(getAllItems());
 
         mEditTextName.getText().clear();
-        mAmount=1;
+        mAmount = 0;
         mTextViewAmount.setText(String.valueOf(mAmount));
     }
 
