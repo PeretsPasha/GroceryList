@@ -1,25 +1,17 @@
 package com.example.grocery;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -160,6 +152,8 @@ public class MainActivity extends AppCompatActivity {
         mDatabase.delete(GroceryContract.GroceryEntry.TABLE_NAME,
                 GroceryContract.GroceryEntry._ID, null);
         mAdapter.swapCursor(getAllItems());
+        mAmount=0;
+        mTextViewAmount.setText(String.valueOf(mAmount));
     }
 
     private void increase() {
@@ -189,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
         mAdapter.swapCursor(getAllItems());
 
         mEditTextName.getText().clear();
-        mAmount = 0;
+        mAmount = 1;    // this is for easy writing
         mTextViewAmount.setText(String.valueOf(mAmount));
     }
 
