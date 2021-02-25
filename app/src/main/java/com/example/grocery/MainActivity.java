@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.polyak.iconswitch.IconSwitch;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
          sharedPref = new SharedPref(this);
-         if (sharedPref.loadNightModeState() == true){
+         if (sharedPref.loadNightModeState()){
              setTheme(R.style.AppThemeDark);
          } else setTheme(R.style.AppTheme);
 
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         IconSwitch iconSwitch = findViewById(R.id.icon_switch);
 
-        if(sharedPref.loadNightModeState() == true) {
+        if(sharedPref.loadNightModeState()) {
             iconSwitch.setChecked(IconSwitch.Checked.RIGHT);
         } else {
             iconSwitch.setChecked(IconSwitch.Checked.LEFT);
@@ -52,14 +53,14 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckChanged(IconSwitch.Checked current) {
                 if (current == IconSwitch.Checked.RIGHT) {
                     name = mEditTextName.getText().toString();
-                    sharedPref.saveVeriables(name, mAmount);
+                    sharedPref.saveVariables(name, mAmount);
                     sharedPref.setNightModeState(true);
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                     finish();
                 } else {
                     name = mEditTextName.getText().toString();
-                    sharedPref.saveVeriables(name, mAmount);
+                    sharedPref.saveVariables(name, mAmount);
                     sharedPref.setNightModeState(false);
                     Intent intent2 = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent2);
@@ -103,6 +104,14 @@ public class MainActivity extends AppCompatActivity {
         name = sharedPref.loadEdit();
         mTextViewAmount.setText(String.valueOf(mAmount));
         mEditTextName.setText(name);
+
+        FloatingActionButton floatingShareButton = findViewById(R.id.fl_share_btn);
+        floatingShareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                share();
+            }
+        });
 
         Button buttonIncrease = findViewById(R.id.button_increase);
         Button buttonDecrease = findViewById(R.id.button_decrease);
@@ -152,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
         mDatabase.delete(GroceryContract.GroceryEntry.TABLE_NAME,
                 GroceryContract.GroceryEntry._ID, null);
         mAdapter.swapCursor(getAllItems());
-        mAmount=0;
+        mAmount = 0;
         mTextViewAmount.setText(String.valueOf(mAmount));
     }
 
@@ -205,10 +214,34 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+    private void share() {
+        String test = getData(mDatabase);
+        Intent shareIntent = new Intent();
+        shareIntent.setAction(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT,test);
+        startActivity(shareIntent);
+    }
+
+    public String getData(SQLiteDatabase db) {
+        StringBuilder dbTxt = new StringBuilder();
+        if (db == null) return "";
+        Cursor cursor = getAllItems();
+        if (cursor.moveToFirst()) {
+            do {
+                String amount = cursor.getString(2);
+                String name = cursor.getString(1);
+                dbTxt.append(name).append(" - ").append(amount).append("\n");
+            } while (cursor.moveToNext());
+        }
+        //Log.d("mLog", dbTxt.toString());
+        return dbTxt.toString().trim();
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         name = mEditTextName.getText().toString();
-        sharedPref.saveVeriables(name, mAmount);
+        sharedPref.saveVariables(name, mAmount);
     }
 }

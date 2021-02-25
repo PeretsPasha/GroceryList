@@ -3,6 +3,7 @@ package com.example.grocery;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class GroceryDBHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "grocerylist.db";

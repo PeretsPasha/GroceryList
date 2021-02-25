@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class SharedPref {
-
     SharedPreferences sharedPreferences;
 
     public SharedPref(Context context) {
@@ -14,28 +13,25 @@ public class SharedPref {
     public void setNightModeState(Boolean state){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putBoolean("nightMode", state);
-        editor.commit();
+        editor.apply();
     }
 
     public boolean loadNightModeState(){
-        Boolean state = sharedPreferences.getBoolean("nightMode", false);
-        return state;
+        return sharedPreferences.getBoolean("nightMode", false);
     }
 
-    public void saveVeriables(String edit, int amount){
+    public void saveVariables(String edit, int amount){
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("edit", edit);
         editor.putInt("amount", amount);
-        editor.commit();
+        editor.apply();
     }
 
     public String loadEdit(){
-        String edit = sharedPreferences.getString("edit", "");
-        return edit;
+        return sharedPreferences.getString("edit", "");
     }
 
     public int loadAmount(){
-        int amount = sharedPreferences.getInt("amount", 0);
-        return amount;
+        return sharedPreferences.getInt("amount", 0);
     }
 }

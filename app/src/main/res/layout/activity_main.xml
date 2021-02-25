@@ -4,6 +4,7 @@
 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,42 +12,10 @@
 
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:orientation="vertical"
-   >
-
-        <com.polyak.iconswitch.IconSwitch
-            android:layout_marginTop="10dp"
-            android:layout_gravity="end"
-            android:id="@+id/icon_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            app:isw_icon_left="@drawable/ic_day"
-            app:isw_icon_right="@drawable/ic_night"
-            app:isw_icon_size="15dp"/>
-
-        <EditText
-            android:id="@+id/edittext_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:gravity="center"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/button_clear"
@@ -55,8 +24,8 @@
             android:layout_gravity="center"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="4dp"
-            android:padding="4dp"
             android:layout_weight="1"
+            android:padding="4dp"
             android:text="Очистити" />
 
         <Button
@@ -77,44 +46,100 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="4dp"
-            android:padding="4dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:padding="4dp"
             android:text="100"
             android:textSize="34sp" />
 
         <Button
             android:id="@+id/button_increase"
             android:layout_width="wrap_content"
-            android:layout_weight="100"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="4dp"
-            android:padding="4dp"
+            android:layout_weight="100"
             android:gravity="center"
+            android:padding="4dp"
             android:text="+"
             android:textColor="@color/primaryDarkColor" />
 
         <Button
             android:id="@+id/button_add"
-            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="8dp"
-            android:padding="4dp"
+            android:layout_weight="1"
             android:gravity="center"
+            android:padding="4dp"
             android:text="Додати" />
 
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-
-        android:id="@+id/recyclerview"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal"
-        android:layout_margin="16dp" />
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="vertical">
 
+        <com.polyak.iconswitch.IconSwitch
+            android:id="@+id/icon_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            app:isw_icon_left="@drawable/ic_day"
+            app:isw_icon_right="@drawable/ic_night"
+            app:isw_icon_size="15dp" />
+
+        <EditText
+            android:id="@+id/edittext_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fl_share_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:layout_constraintBottom_toBottomOf="@+id/recyclerview"
+            app:layout_constraintEnd_toEndOf="@+id/recyclerview"
+            app:layout_constraintTop_toTopOf="@+id/recyclerview"
+            app:layout_constraintVertical_bias="0.9"
+            app:srcCompat="@android:drawable/ic_menu_share" />
+
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/recyclerview"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
